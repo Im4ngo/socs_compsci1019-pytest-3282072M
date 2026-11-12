@@ -21,16 +21,23 @@ def test_calculate_bust_probability():
     assert probability == pytest.approx(0.667, abs=0.01)
     
 
-
 # Sub-task 2
 def test_create_csv_reader_invalid_path():
     with pytest.raises(IOError):
         create_csv_reader("non_existent_config.csv")
 
+@pytest.mark.parametrize(
+    "hand, expected_score",
+    [
+        (["H7", "D8"], 15),
+        (["HJ", "SQ"], 20),
+        (["HA", "D9"], 20),
+        (["HA", "HJ", "D5"], 16),
+        (["H10", "D8", "S5"], 0), ])
 
 # Sub-task 3
 def test_score_hand_combinations(hand, expected_score):
-    pass
+    assert score_hand(hand) == expected_score
 
 # Sub-task 4
 def test_display_player_console_output(capsys):
